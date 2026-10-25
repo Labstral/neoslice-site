@@ -55,7 +55,16 @@
     });
   }
 
-  // 4. Menu mobile : se referme après un choix.
+  // 4. Formulaire Tally : son script ajuste la hauteur du cadre au contenu
+  //    (questions qui apparaissent selon les réponses).
+  if (document.querySelector('iframe[src*="tally.so/embed"]')) {
+    var s = document.createElement("script");
+    s.src = "https://tally.so/widgets/embed.js";
+    s.async = true;
+    document.body.appendChild(s);
+  }
+
+  // 5. Menu mobile : se referme après un choix.
   var menu = document.querySelector(".menu");
   if (menu) menu.querySelectorAll("a").forEach(function (a) {
     a.addEventListener("click", function () { menu.removeAttribute("open"); });
