@@ -1,7 +1,7 @@
 """Construit le site neoSlice (français et anglais) dans le dossier docs/.
 
-    python build.py            -> site provisoire (adresse GitHub, invisible pour Google)
-    python build.py --prod     -> site définitif, servi sur neoslice-ai.com
+    python build.py              -> site définitif, servi sur neoslice-ai.com
+    python build.py --preview    -> version de test (adresse GitHub, invisible pour Google)
 
 Chaque page existe en deux fichiers de contenu, src/fr/<page>.html et
 src/en/<page>.html. Ce script les habille de l'en-tête et du pied de page
@@ -196,35 +196,40 @@ def page(langue: str, cle: str, base: str, prod: bool, version: str) -> str:
 """
 
 
-def construire(prod: bool) -> None:
+def construire(prod: bool, sortie: Path = SORTIE) -> None:
     base = "" if prod else "/neoslice-site"
     version = version_publiee()
-    if SORTIE.exists():
-        shutil.rmtree(SORTIE)
-    shutil.copytree(RACINE / "assets", SORTIE / "assets")
+    if sortie.exists():
+        shutil.rmtree(sortie)
+    shutil.copytree(RACINE / "assets", sortie / "assets")
     for langue in ("fr", "en"):
         for cle in PAGES:
-            dest = SORTIE / url("", langue, cle).strip("/") / "index.html"
+            dest = sortie / url("", langue, cle).strip("/") / "index.html"
             dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_text(page(langue, cle, base, prod, version), encoding="utf-8")
     # L'ancienne adresse Squarespace /home renvoie vers l'accueil.
     redir = f'<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url={base}/"><link rel="canonical" href="https://{DOMAINE}/"><title>neoSlice</title>'
-    (SORTIE / "home").mkdir(exist_ok=True)
-    (SORTIE / "home" / "index.html").write_text(redir, encoding="utf-8")
-    (SORTIE / "404.html").write_text(redir, encoding="utf-8")
-    (SORTIE / ".nojekyll").write_text("", encoding="utf-8")
+    (sortie / "home").mkdir(exist_ok=True)
+    (sortie / "home" / "index.html").write_text(redir, encoding="utf-8")
+    (sortie / "404.html").write_text(redir, encoding="utf-8")
+    (sortie / ".nojekyll").write_text("", encoding="utf-8")
     if prod:
-        (SORTIE / "CNAME").write_text(DOMAINE + "\n", encoding="utf-8")
+        (sortie / "CNAME").write_text(DOMAINE + "\n", encoding="utf-8")
         locs = "".join(f"<url><loc>https://{DOMAINE}{url('', lg, c)}</loc></url>"
                        for lg in ("fr", "en") for c in PAGES)
-        (SORTIE / "sitemap.xml").write_text(
+        (sortie / "sitemap.xml").write_text(
             '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
             + locs + "</urlset>\n", encoding="utf-8")
-        (SORTIE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: https://{DOMAINE}/sitemap.xml\n", encoding="utf-8")
+        (sortie / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: https://{DOMAINE}/sitemap.xml\n", encoding="utf-8")
     else:
-        (SORTIE / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
-    print(f"Site construit dans {SORTIE} ({'définitif' if prod else 'provisoire'}, {version})")
+        (sortie / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
+    print(f"Site construit dans {sortie} ({'définitif' if prod else 'provisoire'}, {version})")
 
 
 if __name__ == "__main__":
-    construire(prod="--prod" in sys.argv)
+    # Par défaut : le VRAI site (neoslice-ai.com). --preview : version de test
+    # sous /neoslice-site, invisible pour Google. --out : autre dossier de sortie
+    # (les tests construisent ailleurs que dans docs/, qui est le site publié).
+    args = sys.argv[1:]
+    dossier = Path(args[args.index("--out") + 1]) if "--out" in args else SORTIE
+    construire(prod="--preview" not in args, sortie=dossier)

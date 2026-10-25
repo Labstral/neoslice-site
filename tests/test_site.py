@@ -17,7 +17,8 @@ sys.path.insert(0, str(RACINE))
 import build  # noqa: E402
 
 SRC = RACINE / "src"
-DOCS = RACINE / "docs"
+DOCS = RACINE / "docs"  # remplacé par le dossier temporaire du test
+PUBLIE = RACINE / "docs"
 BASE = "/neoslice-site"
 ATTRS = ("class", "id", "href", "src", "data-f", "data-cat", "data-panel", "for", "name", "type",
          "target", "download", "data-ns-version", "aria-pressed", "checked")
@@ -68,9 +69,13 @@ def test_les_deux_langues_ont_la_meme_structure(cle):
 
 
 @pytest.fixture(scope="module")
-def site():
-    subprocess.run([sys.executable, str(RACINE / "build.py")], check=True, cwd=RACINE,
-                   capture_output=True)
+def site(tmp_path_factory):
+    """Version de test construite dans un dossier temporaire : docs/, le site
+    publié, n'est jamais touché par les tests."""
+    global DOCS
+    DOCS = tmp_path_factory.mktemp("apercu")
+    subprocess.run([sys.executable, str(RACINE / "build.py"), "--preview", "--out", str(DOCS)],
+                   check=True, cwd=RACINE, capture_output=True)
     return sorted(DOCS.rglob("*.html"))
 
 
@@ -119,3 +124,14 @@ def test_le_site_provisoire_est_invisible_pour_google(site):
         t = f.read_text(encoding="utf-8")
         if "<head>" in t:
             assert 'name="robots" content="noindex' in t, f"page indexable : {f}"
+
+
+def test_le_dossier_publie_est_le_vrai_site():
+    """docs/ est ce que GitHub publie sur neoslice-ai.com : il doit être la
+    version définitive, visible par Google, sans le préfixe de l'aperçu."""
+    assert (PUBLIE / "CNAME").read_text().strip() == "neoslice-ai.com"
+    assert "Disallow: /\n" not in (PUBLIE / "robots.txt").read_text()
+    for f in PUBLIE.rglob("*.html"):
+        t = f.read_text(encoding="utf-8")
+        assert "noindex" not in t, f"page invisible pour Google : {f}"
+        assert "/neoslice-site/" not in t, f"lien de l'aperçu resté dans {f}"
