@@ -88,6 +88,16 @@ main{max-width:var(--maxw); margin:0 auto; padding:clamp(24px,4vw,48px) var(--gu
 .faq details > div{padding:0 0 18px;}
 .faq details p{margin:0;}
 
+/* Page À propos : texte à gauche, photo à droite */
+.doc.about{max-width:1080px;}
+.about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:clamp(28px,5vw,64px); align-items:start;}
+.about-photo{margin:0; position:sticky; top:96px;}
+.about-photo .portrait{max-width:none; width:100%; margin:0;}
+@media (max-width:820px){
+  .about-grid{grid-template-columns:1fr;}
+  .about-photo{order:-1; position:static; max-width:420px;}
+}
+
 /* Page Partenariats */
 .kpis{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:8px 0 28px;}
 .kpis .card{margin:0; text-align:left;}
