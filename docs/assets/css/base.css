@@ -98,6 +98,16 @@ main{max-width:var(--maxw); margin:0 auto; padding:clamp(24px,4vw,48px) var(--gu
   .about-photo{order:-1; position:static; max-width:420px;}
 }
 
+/* Page Retour : texte à gauche, formulaire à droite */
+.doc.wide{max-width:1080px;}
+.split{display:grid; grid-template-columns:1fr 1.3fr; gap:clamp(28px,5vw,64px); align-items:start;}
+.split-text{position:sticky; top:96px;}
+.split-form .form-wrap{margin-top:0;}
+@media (max-width:860px){
+  .split{grid-template-columns:1fr;}
+  .split-text{position:static;}
+}
+
 /* Page Partenariats */
 .kpis{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:8px 0 28px;}
 .kpis .card{margin:0; text-align:left;}
