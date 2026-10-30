@@ -88,6 +88,17 @@ main{max-width:var(--maxw); margin:0 auto; padding:clamp(24px,4vw,48px) var(--gu
 .faq details > div{padding:0 0 18px;}
 .faq details p{margin:0;}
 
+/* Page Partenariats */
+.kpis{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:8px 0 28px;}
+.kpis .card{margin:0; text-align:left;}
+.kpis .n{font-size:clamp(28px,4vw,38px); font-weight:700; letter-spacing:-.02em; line-height:1;}
+.kpis .n span{color:var(--accent); font-size:.6em; margin-left:2px;}
+.kpis .l{font-size:15px; color:var(--muted); margin-top:8px; line-height:1.35;}
+.actions{display:flex; flex-wrap:wrap; gap:12px; margin:22px 0 8px;}
+.btn.ghost{background:transparent; color:var(--ink) !important; border:1.5px solid var(--line);}
+.btn.ghost:hover{background:var(--panel);}
+@media (max-width:640px){ .kpis{grid-template-columns:1fr;} }
+
 /* Formulaire de retour */
 .form-wrap{margin-top:12px;}
 .form-wrap iframe{width:100%; border:0; min-height:600px; display:block;}

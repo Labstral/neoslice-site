@@ -75,13 +75,20 @@ PAGES = {
         "en": ("privacy-policy", "Privacy policy | neoSlice",
                "What data the neoSlice website and software collect, and how."),
     },
+    "partenariats": {
+        "fr": ("partenariats", "Partenariats | neoSlice",
+               "Media kit du groupe Bambu Lab pour les nuls et de neoSlice : audience, engagement et formats de collaboration."),
+        "en": ("partners", "Partners | neoSlice",
+               "Media kit for the Bambu Lab pour les nuls group and neoSlice: audience, engagement and partnership formats."),
+    },
 }
 
 TEXTES = {
     "fr": {
         "nav": [("index", "Accueil"), ("neoslice-pro", "neoSlice Pro"), ("about", "À propos"),
                 ("retour", "Retour utilisateur"), ("faq", "FAQ")],
-        "legal": [("mentions-legales", "Mentions légales"),
+        "legal": [("partenariats", "Partenariats"),
+                  ("mentions-legales", "Mentions légales"),
                   ("politique-de-confidentialite", "Politique de confidentialité"),
                   ("conditions-generales", "Conditions générales d'utilisation")],
         "skip": "Aller au contenu", "menu": "Menu", "tag": "L'impression 3D, réglée pour vous.",
@@ -91,7 +98,8 @@ TEXTES = {
     "en": {
         "nav": [("index", "Home"), ("neoslice-pro", "neoSlice Pro"), ("about", "About"),
                 ("retour", "Feedback"), ("faq", "FAQ")],
-        "legal": [("mentions-legales", "Legal notice"),
+        "legal": [("partenariats", "Partners"),
+                  ("mentions-legales", "Legal notice"),
                   ("politique-de-confidentialite", "Privacy policy"),
                   ("conditions-generales", "Terms of use")],
         "skip": "Skip to content", "menu": "Menu", "tag": "3D printing, dialed in for you.",
