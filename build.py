@@ -226,6 +226,9 @@ def construire(prod: bool, sortie: Path = SORTIE) -> None:
     (sortie / ".nojekyll").write_text("", encoding="utf-8")
     if prod:
         (sortie / "CNAME").write_text(DOMAINE + "\n", encoding="utf-8")
+        # Preuve de propriété pour Google Search Console (ne jamais retirer).
+        (sortie / "googlefb1922dfb134af8c.html").write_text(
+            "google-site-verification: googlefb1922dfb134af8c.html", encoding="utf-8")
         locs = "".join(f"<url><loc>https://{DOMAINE}{url('', lg, c)}</loc></url>"
                        for lg in ("fr", "en") for c in PAGES)
         (sortie / "sitemap.xml").write_text(
