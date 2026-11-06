@@ -2,7 +2,7 @@
    Les pages Accueil et Pro gardent en plus leur propre feuille (index.css,
    neoslice-pro.css), reprise telle quelle de l'ancien site. */
 :root{
-  --ink:#1c1a17; --muted:#726c65; --line:#e9e5df; --bg:#ffffff;
+  --ink:#1c1a17; --muted:#5f5953; --line:#e9e5df; --bg:#ffffff;
   --panel:#f7f5f2; --panel2:#efece6; --accent:#ff6a2c; --accent-ink:#e85718;
   --dark:#14110e; --dark-ink:#f5f2ee; --dark-muted:#a7a099;
   --gutter:clamp(16px,3vw,40px); --maxw:1240px;
@@ -49,9 +49,15 @@ a{color:var(--accent);}
   border-bottom:1px solid var(--line);}
 .menu .sheet .lang{margin-top:16px; align-self:flex-start;}
 .menu .sheet .lang a{font-size:13px; padding:4px 12px; border:0;}
+.bar .right{display:flex; align-items:center; gap:clamp(14px,2vw,24px);}
+/* Bouton Télécharger, toujours visible en haut de l'écran */
+.hdr-dl{background:var(--accent); color:#fff !important; font-size:14px; font-weight:600; text-decoration:none;
+  padding:8px 16px; border-radius:980px; white-space:nowrap; transition:background .2s ease;}
+.hdr-dl:hover{background:var(--accent-ink);}
 @media (max-width:860px){
   .nav{display:none;}
   .menu{display:block;}
+  .bar .right{gap:8px;}
 }
 
 /* ---------- Contenu ---------- */
@@ -119,6 +125,28 @@ main{max-width:var(--maxw); margin:0 auto; padding:clamp(24px,4vw,48px) var(--gu
 .btn.ghost:hover{background:var(--panel);}
 @media (max-width:640px){ .kpis{grid-template-columns:1fr;} }
 
+/* Étiquettes (listes de fonctions ou de slicers, plus lisibles qu'une phrase) */
+.nsx .nsx-chips{list-style:none; display:flex; flex-wrap:wrap; justify-content:center; gap:8px; max-width:760px; margin:24px auto 0; padding:0;}
+.nsx .nsx-chips li{font-size:15px; font-weight:500; color:var(--ink); background:#fff; border:1px solid var(--line);
+  padding:7px 14px; border-radius:980px; line-height:1.3;}
+.nsx-dark .nsx-chips li{color:var(--dark-ink); background:#1f1a15; border-color:#33291d;}
+
+/* Un peu d'air entre un titre de section et son texte */
+.nsx .nsx-h2 + .nsx-lead{margin-top:18px;}
+
+/* Preuve sociale sous les boutons de téléchargement */
+.nsx .nsx-proof{display:flex; flex-wrap:wrap; justify-content:center; gap:6px 22px; margin-top:22px; font-size:15px; color:var(--muted);}
+.nsx-proof b{color:var(--ink); font-weight:700;}
+.nsx-proof .stars{color:#ff9f1c; letter-spacing:1px;}
+
+/* Téléchargement : le site reconnaît Windows ou Mac (site.js pose dl-win ou
+   dl-mac sur <html>). Le bon système garde le gros bouton, l'autre devient un
+   simple lien. Sans reconnaissance (téléphone, tablette), les deux restent. */
+.dl-win [data-os="win"], .dl-mac [data-os="mac"]{order:-1;}
+.dl-win .nsx-btn[data-os="mac"], .dl-mac .nsx-btn[data-os="win"]{
+  background:none !important; color:var(--accent-ink) !important; padding:13px 4px; font-size:15px;}
+.dl-win .nsx-btn[data-os="mac"]:hover, .dl-mac .nsx-btn[data-os="win"]:hover{text-decoration:underline; transform:none;}
+
 /* Formulaire de retour */
 .form-wrap{margin-top:12px;}
 .form-wrap iframe{width:100%; border:0; min-height:600px; display:block;}
@@ -148,3 +176,6 @@ main{max-width:var(--maxw); margin:0 auto; padding:clamp(24px,4vw,48px) var(--gu
 
 a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:8px;}
 @media (prefers-reduced-motion:reduce){ *{animation:none !important; transition:none !important;} }
+
+/* Ancre du bouton Télécharger : ne pas finir cachée sous l'en-tête collant */
+#telecharger{scroll-margin-top:120px;}

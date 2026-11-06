@@ -38,16 +38,45 @@
       .catch(function () {});
   }
 
-  // 3. Filtres des avis clients.
+  // 3. Système du visiteur : sur Windows ou sur Mac, le bon bouton de
+  //    téléchargement passe en premier et l'autre devient un simple lien.
+  //    Téléphone, tablette ou système inconnu : les deux boutons restent.
+  try {
+    var ua = navigator.userAgent || "";
+    var plat = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
+    var mobile = /Android|iPhone|iPad|iPod|Mobile/i.test(ua) || (/Mac/i.test(plat) && navigator.maxTouchPoints > 1);
+    var os = mobile ? "" : /Win/i.test(plat) ? "win" : /Mac/i.test(plat) ? "mac" : "";
+    if (os) {
+      root.classList.add("dl-" + os);
+      // L'aide à l'installation s'ouvre directement sur le bon système.
+      var onglet = document.getElementById("nsxaide-os-" + os);
+      if (onglet) onglet.checked = true;
+    }
+  } catch (e) {}
+
+  // 4. Avis clients : filtres, et seulement six avis tant qu'on ne demande
+  //    pas la suite (sans JavaScript, tous restent visibles).
   var avis = document.querySelector(".nsxavis-reviews");
   if (avis) {
     var puces = avis.querySelectorAll(".nsxavis-chip");
     var cartes = avis.querySelectorAll(".nsxavis-card");
+    var grille = avis.querySelector(".nsxavis-grid");
+    var suite = avis.querySelector(".nsxavis-more");
+    var deplier = function () {
+      if (grille) grille.classList.remove("court");
+      if (suite) suite.hidden = true;
+    };
+    if (grille && suite && avis.querySelector(".nsxavis-card.plus")) {
+      grille.classList.add("court");
+      suite.hidden = false;
+      suite.querySelector("button").addEventListener("click", deplier);
+    }
     puces.forEach(function (c) {
       c.addEventListener("click", function () {
         puces.forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
         c.setAttribute("aria-pressed", "true");
         var f = c.getAttribute("data-f");
+        if (f !== "all") deplier();
         cartes.forEach(function (carte) {
           carte.classList.toggle("hide", !(f === "all" || carte.getAttribute("data-cat") === f));
         });
@@ -55,7 +84,7 @@
     });
   }
 
-  // 4. Formulaire Tally : son script ajuste la hauteur du cadre au contenu
+  // 5. Formulaire Tally : son script ajuste la hauteur du cadre au contenu
   //    (questions qui apparaissent selon les réponses).
   if (document.querySelector('iframe[src*="tally.so/embed"]')) {
     var s = document.createElement("script");
@@ -64,7 +93,7 @@
     document.body.appendChild(s);
   }
 
-  // 5. Menu mobile : se referme après un choix.
+  // 6. Menu mobile : se referme après un choix.
   var menu = document.querySelector(".menu");
   if (menu) menu.querySelectorAll("a").forEach(function (a) {
     a.addEventListener("click", function () { menu.removeAttribute("open"); });

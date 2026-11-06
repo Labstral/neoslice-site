@@ -94,6 +94,7 @@ TEXTES = {
         "skip": "Aller au contenu", "menu": "Menu", "tag": "L'impression 3D, réglée pour vous.",
         "copy": "© 2026 Emmanuel Percheron. Tous droits réservés.",
         "langs": "Langue", "groupe": "Groupe Facebook Bambu Lab pour les nuls", "insta": "Instagram",
+        "dl": "Télécharger",
     },
     "en": {
         "nav": [("index", "Home"), ("neoslice-pro", "neoSlice Pro"), ("about", "About"),
@@ -105,6 +106,7 @@ TEXTES = {
         "skip": "Skip to content", "menu": "Menu", "tag": "3D printing, dialed in for you.",
         "copy": "© 2026 Emmanuel Percheron. All rights reserved.",
         "langs": "Language", "groupe": "Bambu Lab pour les nuls Facebook group", "insta": "Instagram",
+        "dl": "Download",
     },
 }
 
@@ -182,9 +184,12 @@ def page(langue: str, cle: str, base: str, prod: bool, version: str) -> str:
 <header class="site-header">
   <div class="bar">
     <a class="brand" href="{url(base, langue, 'index')}">neoSlice</a>
+    <div class="right">
     <nav class="nav" aria-label="Navigation">{liens(t["nav"])}{bascule}</nav>
+    <a class="hdr-dl" href="{url(base, langue, 'index')}#telecharger">{t["dl"]}</a>
     <details class="menu"><summary aria-label="{t["menu"]}"><span></span></summary>
       <div class="sheet">{liens(t["nav"])}{bascule}</div></details>
+    </div>
   </div>
 </header>
 <main id="contenu">

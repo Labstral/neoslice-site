@@ -5,10 +5,11 @@
       <p class="nsx-eyebrow nsx-rise" data-ns-version>{{version}}</p>
       <h1 class="nsx-h1 nsx-rise d1">L'impression 3D,<br>réglée pour vous.</h1>
       <p class="nsx-lead nsx-rise d2" style="margin-top:22px;">Déposez votre modèle. neoSlice analyse la pièce, choisit les bons réglages et exporte un fichier prêt à imprimer. Vous gardez le contrôle, sans la prise de tête.</p>
-      <div class="nsx-cta nsx-rise d3">
-        <a class="nsx-btn" href="https://github.com/labstral/neoslice-assets/releases/download/neoslice-latest/neoSlice_Setup_Windows.exe" target="_blank" rel="noopener" download>Télécharger pour Windows</a>
-        <a class="nsx-btn" href="https://github.com/labstral/neoslice-assets/releases/download/neoslice-latest/neoSlice_macOS.zip" target="_blank" rel="noopener" download>Télécharger pour macOS</a>
+      <div class="nsx-cta nsx-rise d3" id="telecharger">
+        <a class="nsx-btn" data-os="win" href="https://github.com/labstral/neoslice-assets/releases/download/neoslice-latest/neoSlice_Setup_Windows.exe" target="_blank" rel="noopener" download>Télécharger pour Windows</a>
+        <a class="nsx-btn" data-os="mac" href="https://github.com/labstral/neoslice-assets/releases/download/neoslice-latest/neoSlice_macOS.zip" target="_blank" rel="noopener" download>Télécharger pour macOS</a>
       </div>
+      <p class="nsx-proof nsx-rise d3"><span><b>9 400+</b> téléchargements</span><span><span class="stars">★★★★★</span> <b>4,8/5</b> de moyenne</span><span><b>600+</b> imprimantes</span></p>
       <p class="nsx-note nsx-rise d3">Gratuit. Windows 10/11 et Mac M2 ou plus récent. <a href="{{url:neoslice-pro}}" style="color:var(--accent); font-weight:500;">Découvrir neoSlice Pro ›</a></p>
       <img class="nsx-img" src="{{base}}/assets/img/hero-neoslice.jpg" alt="neoSlice">
     </div>
@@ -40,13 +41,13 @@
 
   <section class="nsx-sec">
     <div class="nsx-wrap">
-      <div class="nsx-split">
+      <div class="nsx-split wide">
         <div>
           <p class="nsx-eyebrow">Analyse</p>
           <h2 class="nsx-h2">Voyez la solidité de chaque pièce.</h2>
           <p class="nsx-p" style="margin-top:20px;">La carte de fragilité colore chaque pièce du plateau selon sa résistance. Vert pour solide, rouge pour fragile. Vous savez quoi renforcer avant même de lancer l'impression.</p>
         </div>
-        <img class="nsx-img" src="{{base}}/assets/img/carte-fragilite.jpg" alt="Carte de fragilité">
+        <img class="nsx-img" src="{{base}}/assets/img/carte-fragilite-zoom.jpg" alt="Carte de fragilité : chaque pièce du plateau colorée selon sa solidité">
       </div>
     </div>
   </section>
@@ -60,21 +61,8 @@
         <div class="nsx-stat"><div class="n">80+</div><div class="l">marques d'imprimantes</div></div>
         <div class="nsx-stat"><div class="n">600+</div><div class="l">imprimantes prises en charge</div></div>
       </div>
-      <p class="nsx-lead">Bambu Studio, OrcaSlicer, PrusaSlicer, CrealityPrint, ElegooSlicer, AnycubicSlicer, Snapmaker Orca, UltiMaker Cura et FlashPrint. Le catalogue s'adapte au slicer que vous choisissez.</p>
-    </div>
-  </section>
-
-  <section class="nsx-sec nsx-center">
-    <div class="nsx-wrap">
-      <p class="nsx-eyebrow">Création 3D</p>
-      <h2 class="nsx-h2">neoForge, le modeleur 3D.</h2>
-      <p class="nsx-lead">La pièce que vous cherchez n'existe nulle part ? Dessinez la. Posez une forme, étirez la à la souris, percez, arrondissez les arêtes, mesurez d'un point à un autre. Quand elle est prête, elle part dans neoSlice en un clic.</p>
-      <p class="nsx-taglist">Cube, cylindre, sphère, cône, tore, engrenage, cadres. Trous taraudés et logements d'écrou, M2 à M12. Congés et chanfreins. Découpe par un plan. Règle de mesure.</p>
-      <img class="nsx-img" src="{{base}}/assets/img/neoforge.jpg" alt="neoForge">
-      <div class="nsx-cta" style="justify-content:center;">
-        <a class="nsx-link" href="{{url:neoslice-pro}}#neoforge">Voir neoForge <span class="nsx-arw">›</span></a>
-      </div>
-      <p class="nsx-note">Inclus dans neoSlice Pro. Windows et macOS.</p>
+      <ul class="nsx-chips"><li>Bambu Studio</li><li>OrcaSlicer</li><li>PrusaSlicer</li><li>CrealityPrint</li><li>ElegooSlicer</li><li>AnycubicSlicer</li><li>Snapmaker Orca</li><li>UltiMaker Cura</li><li>FlashPrint</li></ul>
+      <p class="nsx-note" style="font-size:15px; margin-top:20px;">Le catalogue d'imprimantes s'adapte au slicer que vous choisissez.</p>
     </div>
   </section>
 
@@ -82,9 +70,8 @@
     <div class="nsx-wrap">
       <p class="nsx-eyebrow">Pour aller plus loin</p>
       <h2 class="nsx-h2">Et si neoSlice créait aussi vos pièces ?</h2>
-      <p class="nsx-lead">Là où neoSlice optimise vos impressions, la version Pro va plus loin : elle génère les objets qu'il vous manque, vous laisse dessiner ceux qui n'existent pas, répare vos impressions ratées et pilote tout votre atelier.</p>
-      <p class="nsx-taglist">neoGen, le générateur d'objets sur mesure. neoForge, le modeleur 3D. Oen, l'assistant IA 100 % local. Diagnostic photo des ratés. Export multicouleur. Devis, factures et clients.</p>
-      <img class="nsx-img" src="{{base}}/assets/img/neogen.jpg" alt="neoGen">
+      <p class="nsx-lead">La version Pro génère les objets qu'il vous manque, vous laisse dessiner ceux qui n'existent pas, répare vos impressions ratées et pilote votre atelier.</p>
+      <img class="nsx-img" src="{{base}}/assets/img/neogen-zoom.jpg" alt="neoGen : une boîte et son couvercle générés à la bonne taille">
       <div class="nsx-cta" style="justify-content:center;">
         <a class="nsx-link" href="{{url:neoslice-pro}}">Découvrir neoSlice Pro <span class="nsx-arw">›</span></a>
       </div>
@@ -201,43 +188,44 @@
           <div class="nsxavis-sign"><div class="nsxavis-av">L</div><div class="nsxavis-who"><span class="r">Débutant appliqué</span> <span class="m">· Anycubic Kobra</span></div></div>
         </div>
 
-        <div class="nsxavis-card" data-cat="compat">
+        <div class="nsxavis-card plus" data-cat="compat">
           <div class="rate">★★★★★</div>
           <blockquote>Je jongle entre une Bambu à la maison et une FlashForge au fablab. Un seul outil qui exporte pour les deux, chacun avec son bon format. Ça m'évite de réapprendre deux slicers.</blockquote>
           <div class="nsxavis-sign"><div class="nsxavis-av">F</div><div class="nsxavis-who"><span class="r">Utilisateur multi-machines</span> <span class="m">· Bambu + FlashForge</span></div></div>
         </div>
 
-        <div class="nsxavis-card" data-cat="pro">
+        <div class="nsxavis-card plus" data-cat="pro">
           <div class="rate">★★★★★</div>
           <blockquote>Le diagnostic photo des ratés vaut à lui seul le prix. Je prends une photo de l'impression foirée, il me dit ce qui cloche et quoi corriger. J'ai résolu un problème de warping qui me traînait depuis des mois.</blockquote>
           <div class="nsxavis-sign"><div class="nsxavis-av">R</div><div class="nsxavis-who"><span class="r">Bricoleur exigeant</span> <span class="m">· utilisateur Pro</span><div class="nsxavis-verif">✓ Achat vérifié</div></div></div>
         </div>
 
-        <div class="nsxavis-card" data-cat="compat">
+        <div class="nsxavis-card plus" data-cat="compat">
           <div class="rate">★★★★★</div>
           <blockquote>Ma machine venait juste de sortir et je ne pensais pas la trouver. Une petite mise à jour et elle était là. Le catalogue suit vraiment le marché, ça inspire confiance sur la durée.</blockquote>
           <div class="nsxavis-sign"><div class="nsxavis-av">E</div><div class="nsxavis-who"><span class="r">Early adopter</span> <span class="m">· Eryone Thinker SE</span></div></div>
         </div>
 
-        <div class="nsxavis-card" data-cat="debut">
+        <div class="nsxavis-card plus" data-cat="debut">
           <div class="rate">★★★★☆</div>
           <blockquote>Interface claire, en français, qui ne noie pas sous 200 paramètres. Je choisis mon intention par menus et c'est traduit en réglages. Parfait pour apprendre sans se décourager. J'enlève une étoile parce que j'aimerais encore plus de tutos vidéo.</blockquote>
           <div class="nsxavis-sign"><div class="nsxavis-av">S</div><div class="nsxavis-who"><span class="r">Nouvelle utilisatrice</span> <span class="m">· Prusa MK4</span></div></div>
         </div>
 
-        <div class="nsxavis-card" data-cat="pro">
+        <div class="nsxavis-card plus" data-cat="pro">
           <div class="rate">★★★★★</div>
           <blockquote>L'export multicouleur avec le décompte du filament par couleur, c'est exactement ce qu'il me fallait pour chiffrer mes pièces bicolores. Je sais combien de grammes de chaque bobine je consomme avant de lancer.</blockquote>
           <div class="nsxavis-sign"><div class="nsxavis-av">T</div><div class="nsxavis-who"><span class="r">Vendeur sur marchés</span> <span class="m">· utilisateur Pro</span><div class="nsxavis-verif">✓ Achat vérifié</div></div></div>
         </div>
 
-        <div class="nsxavis-card" data-cat="oen">
+        <div class="nsxavis-card plus" data-cat="oen">
           <div class="rate">★★★★★</div>
           <blockquote>J'ai généré une tour de température et un test de surplombs directement depuis la bibliothèque, sans chercher de fichier sur Internet. Tout est intégré. Pour calibrer une nouvelle bobine, c'est deux minutes.</blockquote>
           <div class="nsxavis-sign"><div class="nsxavis-av">P</div><div class="nsxavis-who"><span class="r">Passionné de calibration</span> <span class="m">· utilisateur Pro</span><div class="nsxavis-verif">✓ Achat vérifié</div></div></div>
         </div>
 
       </div>
+      <div class="nsxavis-more" hidden><button type="button">Voir tous les avis</button></div>
     </div>
   </section>
 
@@ -249,8 +237,8 @@
     <div class="nsx-wrap">
       <h2 class="nsx-h2">Prêt à mieux imprimer.</h2>
       <div class="nsx-cta" style="justify-content:center;">
-        <a class="nsx-btn" href="https://github.com/labstral/neoslice-assets/releases/download/neoslice-latest/neoSlice_Setup_Windows.exe" target="_blank" rel="noopener" download>Télécharger pour Windows</a>
-        <a class="nsx-btn" href="https://github.com/labstral/neoslice-assets/releases/download/neoslice-latest/neoSlice_macOS.zip" target="_blank" rel="noopener" download>Télécharger pour macOS</a>
+        <a class="nsx-btn" data-os="win" href="https://github.com/labstral/neoslice-assets/releases/download/neoslice-latest/neoSlice_Setup_Windows.exe" target="_blank" rel="noopener" download>Télécharger pour Windows</a>
+        <a class="nsx-btn" data-os="mac" href="https://github.com/labstral/neoslice-assets/releases/download/neoslice-latest/neoSlice_macOS.zip" target="_blank" rel="noopener" download>Télécharger pour macOS</a>
       </div>
       <p class="nsx-note">Gratuit. Windows 10/11 et Mac M2 ou plus récent.</p>
     </div>
