@@ -112,7 +112,7 @@ TEXTES = {
 
 FACEBOOK = "https://www.facebook.com/groups/bambulabpourlesnuls/"
 INSTAGRAM = "https://www.instagram.com/manu_studio_ch/"
-TIKTOK = "https://www.tiktok.com/@labstral"
+TIKTOK = "https://www.tiktok.com/@manu_studio_ch"
 LINKEDIN = "https://www.linkedin.com/in/emmanuel-percheron/"
 FACEBOOK_PROFIL = "https://www.facebook.com/profile.php?id=100085604569939"
 SVG_LI = ('<svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.94 8.5H3.56V20h3.38V8.5zM5.25 3.5a1.97 1.97 0 1 0 0 3.94 1.97 1.97 0 0 0 0-3.94zM20.44 13.2c0-3.1-1.65-4.98-4.3-4.98-1.6 0-2.62.86-3.06 1.66V8.5H9.7V20h3.38v-6.08c0-1.6.6-2.7 2.02-2.7 1.38 0 1.96 1.04 1.96 2.7V20h3.38v-6.8z"/></svg>')
