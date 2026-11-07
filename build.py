@@ -29,26 +29,30 @@ GIST = ("https://gist.githubusercontent.com/Labstral/"
 # clé de page -> chemin par langue, feuille de style propre, titre, description
 PAGES = {
     "index": {
-        "fr": ("", "neoSlice | L'impression 3D, réglée pour vous",
-               "neoSlice analyse votre pièce, choisit les bons réglages et exporte un fichier "
-               "prêt à imprimer, pour 9 slicers et plus de 600 imprimantes. Gratuit sur Windows et Mac."),
-        "en": ("", "neoSlice | 3D printing, dialed in for you",
+        "fr": ("", "neoSlice | Logiciel d'impression 3D avec IA, gratuit",
+               "neoSlice analyse votre pièce, choisit les bons réglages et exporte un fichier prêt à "
+               "imprimer pour 9 slicers et 600+ imprimantes. Gratuit, Windows et Mac."),
+        "en": ("", "neoSlice | AI 3D printing software, free for Windows & Mac",
                "neoSlice analyzes your part, picks the right settings and exports a print-ready "
                "file for 9 slicers and 600+ printers. Free on Windows and Mac."),
         "css": "index.css",
     },
     "neoslice-pro": {
-        "fr": ("neoslice-pro", "neoSlice Pro | Créez plus, ratez moins",
+        "fr": ("neoslice-pro", "neoSlice Pro | Créez plus, ratez moins en impression 3D",
                "neoGen, neoForge, l'assistant IA local Oen, le diagnostic photo, l'export "
                "multicouleur et la gestion d'atelier. 79,99 € HT, paiement unique, à vie."),
-        "en": ("neoslice-pro", "neoSlice Pro | Create more, fail less",
+        "en": ("neoslice-pro", "neoSlice Pro | Create more, fail less in 3D printing",
                "neoGen, neoForge, Oen the local AI assistant, photo diagnosis, multicolor export "
                "and workshop management. €79.99 excl. VAT, one-time payment, for life."),
         "css": "neoslice-pro.css",
     },
     "about": {
-        "fr": ("about", "À propos | neoSlice", "Pourquoi et comment neoSlice est né."),
-        "en": ("about", "About | neoSlice", "Why and how neoSlice was born."),
+        "fr": ("about", "À propos | neoSlice, logiciel d'impression 3D",
+               "Pourquoi et comment neoSlice est né : un logiciel d'impression 3D conçu en Suisse "
+               "par Emmanuel Percheron, fondateur du studio Qyntiv."),
+        "en": ("about", "About | neoSlice, 3D printing software",
+               "Why and how neoSlice was born: 3D printing software made in Switzerland by "
+               "Emmanuel Percheron, founder of the Qyntiv studio."),
     },
     "retour": {
         "fr": ("retour", "Retour utilisateur | neoSlice",
@@ -57,8 +61,8 @@ PAGES = {
                "A bug, an idea, a question? Write directly to the author of neoSlice."),
     },
     "faq": {
-        "fr": ("faq", "FAQ | neoSlice", "Les réponses aux questions les plus fréquentes sur neoSlice."),
-        "en": ("faq", "FAQ | neoSlice", "Answers to the most frequent questions about neoSlice."),
+        "fr": ("faq", "FAQ | neoSlice, logiciel d'impression 3D", "Les réponses aux questions les plus fréquentes sur neoSlice."),
+        "en": ("faq", "FAQ | neoSlice, 3D printing software", "Answers to the most frequent questions about neoSlice."),
     },
     "mentions-legales": {
         "fr": ("mentions-legales", "Mentions légales | neoSlice", "Mentions légales du site neoSlice."),
@@ -93,6 +97,7 @@ TEXTES = {
                   ("conditions-generales", "Conditions générales d'utilisation")],
         "skip": "Aller au contenu", "menu": "Menu", "tag": "L'impression 3D, réglée pour vous.",
         "copy": "© 2026 Emmanuel Percheron. Tous droits réservés.",
+        "qyntiv": 'Conçu par <a href="https://qyntiv.com/">Qyntiv</a>, studio de logiciels suisse.',
         "langs": "Langue", "groupe": "Groupe Facebook Bambu Lab pour les nuls", "insta": "Instagram",
         "dl": "Télécharger",
     },
@@ -105,6 +110,7 @@ TEXTES = {
                   ("conditions-generales", "Terms of use")],
         "skip": "Skip to content", "menu": "Menu", "tag": "3D printing, dialed in for you.",
         "copy": "© 2026 Emmanuel Percheron. All rights reserved.",
+        "qyntiv": 'Made by <a href="https://qyntiv.com/en/">Qyntiv</a>, Swiss software studio.',
         "langs": "Language", "groupe": "Bambu Lab pour les nuls Facebook group", "insta": "Instagram",
         "dl": "Download",
     },
@@ -139,6 +145,33 @@ def version_publiee() -> str:
         return "neoSlice " + ".".join(str(v).split(".")[:2])
     except Exception:
         return "neoSlice 2.5"
+
+
+def fiche_logiciel(langue: str, cle: str) -> str:
+    """Données structurées SoftwareApplication (accueil et neoSlice Pro) : Google comprend que c'est un
+    logiciel, gratuit, pour Windows et macOS, avec une version Pro payante."""
+    if cle not in ("index", "neoslice-pro"):
+        return ""
+    fr = langue == "fr"
+    donnees = {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "neoSlice Pro" if cle == "neoslice-pro" else "neoSlice",
+        "url": f"https://{DOMAINE}" + url("", langue, cle),
+        "description": PAGES[cle][langue][2],
+        "applicationCategory": "DesignApplication",
+        "applicationSubCategory": "Impression 3D" if fr else "3D printing",
+        "operatingSystem": "Windows, macOS",
+        "inLanguage": langue,
+        "image": f"https://{DOMAINE}/assets/img/hero-neoslice.jpg",
+        "offers": ([{"@type": "Offer", "price": "79.99", "priceCurrency": "EUR",
+                     "url": "https://gumroad.com/l/zetye"}] if cle == "neoslice-pro" else
+                   [{"@type": "Offer", "price": "0", "priceCurrency": "EUR"}]),
+        "author": {"@type": "Person", "name": "Emmanuel Percheron"},
+        "publisher": {"@type": "Organization", "name": "Qyntiv", "url": "https://qyntiv.com/"},
+    }
+    return ('<script type="application/ld+json">'
+            + json.dumps(donnees, ensure_ascii=False, separators=(",", ":")) + "</script>\n")
 
 
 def page(langue: str, cle: str, base: str, prod: bool, version: str) -> str:
@@ -183,7 +216,7 @@ def page(langue: str, cle: str, base: str, prod: bool, version: str) -> str:
 <link rel="icon" href="{base}/assets/img/favicon-light.png" type="image/png">
 <link rel="apple-touch-icon" href="{base}/assets/img/apple-touch-icon.png">
 {"".join(f'<link rel="stylesheet" href="{h}">' + chr(10) for h in css)}<script src="{base}/assets/js/site.js" defer></script>
-</head>
+{fiche_logiciel(langue, cle)}</head>
 <body>
 <a class="skip" href="#contenu">{t["skip"]}</a>
 <header class="site-header">
@@ -211,7 +244,7 @@ def page(langue: str, cle: str, base: str, prod: bool, version: str) -> str:
       <a href="{FACEBOOK}" target="_blank" rel="noopener" aria-label="{t["groupe"]}" title="{t["groupe"]}">{SVG_GROUPE}</a>
     </div>
     <nav aria-label="{'Informations légales' if langue == 'fr' else 'Legal information'}">{liens(t["legal"], courant=False)}</nav>
-    <p class="copy">{t["copy"]}</p>
+    <p class="copy">{t["copy"]} {t["qyntiv"]}</p>
   </div>
 </footer>
 </body>
